@@ -1,1 +1,17 @@
 name: Primeiro Workflow
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Iniciando o workflow
+        run: echo "iniciando o workflow"
+      - uses: actions/checkout@v2
+      - name: Configurando Node.js
+        uses: actions/setup-node@v5
+      - name: Listando arquivos
+        run: ls "${{ github.workspace }}"
+      - name: Status
+        run: echo "${{ job.status }}"
