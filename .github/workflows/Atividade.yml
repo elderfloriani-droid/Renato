@@ -1,1 +1,25 @@
-name: Segundo Workflow
+name: Validação do Projeto
+
+on:
+  push:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fazer checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Validar README.md
+        run: |
+          if [ ! -f README.md ]; then
+            echo "README.md não encontrado."
+            exit 1
+          fi
+          echo "README.md encontrado."
+
+      - name: Exibir resultado da validação
+        run: |
+          echo "Validação concluída."
+          echo "Repositório: ${{ github.repository }}"
+          echo "Usuário: ${{ github.actor }}"
